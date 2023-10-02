@@ -1,6 +1,7 @@
-package factoryPattern;
+package factoryPattern2;
 
 public interface Pet {
-    public String makeSound();
-    public String  play();
+    String makeSound();
+    String play();
+    void displayFactoryChange();
 }
