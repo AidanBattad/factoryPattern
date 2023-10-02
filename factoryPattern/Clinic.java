@@ -3,37 +3,71 @@ package factoryPattern;
 import java.util.Scanner;
 
 public class Clinic {
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        int choice;
+        do
+        {
+            System.out.println("[1] Dog");
+            System.out.println("[2] Cat");
+            System.out.println("[3] Exit");
+            System.out.print("Choose your pet number: ");
+            choice = input.nextInt();
 
-        System.out.println("[1] Dog");
-        System.out.println("[2] Cat");
-        System.out.print("\nChoose your pet number: ");
-        Integer choice = input.nextInt();
-
+            switch (choice)
+            {
+                case 1:
+                    DogInfo();
+                    break;
+                case 2:
+                    CatInfo();
+                    break;
+                case 3:
+                    System.out.println("Exiting the program.");
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } while (choice != 3);
+    }
+    private static void DogInfo()
+    {
         PetRecord petFile = new PetRecord();
-        Pet pet;
+        Pet pet = new Dog();
+        petFile.setPetId("D01");
+        petFile.setPetName("Bantay");
+        petFile.setPet(pet);
+        ((Dog) pet).setBreed("German Shepperd");
 
-        switch(choice){
-            case 1: pet = new Dog();
-                petFile.setPetId("D01");
-                petFile.setPetName("Bantay");
-                petFile.setPet(pet);
-                ((Dog) pet).setBreed("German Shepperd");
-                break;
-            case 2: pet = new Cat();
-                petFile.setPetId("C01");
-                petFile.setPetName("Muning");
-                petFile.setPet(pet);
-                ((Cat) pet).setNoOfLives(9);
+        PetInfo(petFile);
+    }
+
+    private static void CatInfo()
+    {
+        PetRecord petFile = new PetRecord();
+        Pet pet = new Cat();
+        petFile.setPetId("C01");
+        petFile.setPetName("Muning");
+        petFile.setPet(pet);
+        ((Cat) pet).setNoOfLives(9);
+
+        PetInfo(petFile);
+    }
+
+    private static void PetInfo(PetRecord petRecord)
+    {
+        System.out.println("Pet id is " + petRecord.getPetId());
+        System.out.println("Pet name is " + petRecord.getPetName());
+        System.out.println("Pet kind: " + petRecord.getPet().getClass().getSimpleName());
+        System.out.println("Communication sound: " + petRecord.getPet().makeSound());
+        System.out.println("Play mode: " + petRecord.getPet().play());
+        System.out.println();
+        if (petRecord.getPet() instanceof Dog)
+        {
+            System.out.println("Breed: " + ((Dog) petRecord.getPet()).getBreed());
+        } else if (petRecord.getPet() instanceof Cat)
+        {
+            System.out.println("Number of lives: " + ((Cat) petRecord.getPet()).getNoOfLives());
         }
-
-        System.out.println("Pet id is " + petFile.getPetId());
-        System.out.println("Pet name is " + petFile.getPetName());
-        System.out.println("Pet kind: " + petFile.getPet().getClass().getSimpleName());
-        System.out.println("Communication sound: "+ petFile.getPet().makeSound());
-        System.out.println("Play mode: " + petFile.getPet().play());
-
     }
 }
