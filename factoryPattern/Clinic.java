@@ -1,4 +1,4 @@
-package factoryPattern;
+package factoryPattern2;
 
 import java.util.Scanner;
 
@@ -26,7 +26,7 @@ public class Clinic {
                     System.out.println("Exiting the program.");
                     break;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("Invalid choice. Please try again.");
             }
         } while (choice != 3);
     }
@@ -56,18 +56,14 @@ public class Clinic {
 
     private static void PetInfo(PetRecord petRecord)
     {
+        petRecord.getPet().displayFactoryChange();
+        System.out.println();
         System.out.println("Pet id is " + petRecord.getPetId());
         System.out.println("Pet name is " + petRecord.getPetName());
         System.out.println("Pet kind: " + petRecord.getPet().getClass().getSimpleName());
         System.out.println("Communication sound: " + petRecord.getPet().makeSound());
         System.out.println("Play mode: " + petRecord.getPet().play());
-        System.out.println();
-        if (petRecord.getPet() instanceof Dog)
-        {
-            System.out.println("Breed: " + ((Dog) petRecord.getPet()).getBreed());
-        } else if (petRecord.getPet() instanceof Cat)
-        {
-            System.out.println("Number of lives: " + ((Cat) petRecord.getPet()).getNoOfLives());
-        }
+        
+        
     }
 }
